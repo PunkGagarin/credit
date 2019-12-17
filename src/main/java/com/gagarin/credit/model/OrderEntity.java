@@ -51,11 +51,11 @@ public class OrderEntity {
         this.id = id;
     }
 
-    public double getSum() {
+    public Double getSum() {
         return sum;
     }
 
-    public void setSum(double sum) {
+    public void setSum(Double sum) {
         this.sum = sum;
     }
 

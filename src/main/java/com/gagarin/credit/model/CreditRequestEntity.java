@@ -21,7 +21,7 @@ public class CreditRequestEntity {
 
     private Double sum;
 
-    private int rate;
+    private Double rate;
 
     @Column(name = "userLogin")
     private String userLogin;
@@ -33,7 +33,7 @@ public class CreditRequestEntity {
     public CreditRequestEntity() {
     }
 
-    public CreditRequestEntity(Date createDate, Double sum, int rate, String userLogin) {
+    public CreditRequestEntity(Date createDate, Double sum, Double rate, String userLogin) {
         this.createDate = createDate;
         this.sum = sum;
         this.rate = rate;
@@ -64,11 +64,11 @@ public class CreditRequestEntity {
         this.sum = sum;
     }
 
-    public int getRate() {
+    public Double getRate() {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(Double rate) {
         this.rate = rate;
     }
 
