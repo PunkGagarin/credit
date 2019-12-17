@@ -16,12 +16,17 @@ public class ProductEntity {
     @Min(1L)
     private Long code;
 
+    @Column(name = "minSum")
     private int minSum;
+    @Column(name = "maxSum")
     private int maxSum;
 
+    @Column(name = "minRate")
     private int minRate;
+    @Column(name = "maxRate")
     private int maxRate;
 
+    @Column(name = "term")
     private int term;
 
     @ManyToMany(mappedBy = "basketProducts")

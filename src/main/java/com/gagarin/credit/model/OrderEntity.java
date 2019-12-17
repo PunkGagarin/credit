@@ -19,7 +19,7 @@ public class OrderEntity {
     @Positive
     @NotNull
     @Column(name = "sum")
-    private double sum;
+    private Double sum;
 
 
     @Column(name = "discount")
