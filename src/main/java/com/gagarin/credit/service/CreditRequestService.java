@@ -10,7 +10,7 @@ public interface CreditRequestService {
 
     List<CreditRequestEntity> findAll();
 
-    CreditRequestEntity createRequest(CreditRequestEntity creditRequest);
+    CreditRequestEntity saveRequest(CreditRequestEntity creditRequest);
 
     CreditRequestEntity createRequestByOrderAndProduct(OrderEntity order, ProductEntity product);
 

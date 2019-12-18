@@ -24,7 +24,7 @@ public class CreditRequestServiceImpl implements CreditRequestService {
     }
 
     @Override
-    public CreditRequestEntity createRequest(CreditRequestEntity creditRequest) {
+    public CreditRequestEntity saveRequest(CreditRequestEntity creditRequest) {
         return creditRequestRepository.save(creditRequest);
     }
 

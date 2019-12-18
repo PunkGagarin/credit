@@ -1,6 +1,8 @@
 package com.gagarin.credit.controller;
 
+import com.gagarin.credit.model.CreditRequestEntity;
 import com.gagarin.credit.model.OrderEntity;
+import com.gagarin.credit.model.ProductEntity;
 import com.gagarin.credit.service.CreditRequestService;
 import com.gagarin.credit.service.OrderService;
 import com.gagarin.credit.service.ProductService;
@@ -54,9 +56,16 @@ public class CreditController {
 
     @PostMapping("/request/new")
     public String createRequest(@RequestParam("orderId") Long orderId, Model model) {
-        //createRequest
+        //saveRequest
+        creditRequestService.saveRequest(createRequestByOrderId(orderId));
 
         return String.format("redirect:/request?reqId=%d", 1);
+    }
+
+    private CreditRequestEntity createRequestByOrderId(Long orderId) {
+        OrderEntity order = orderService.getOrder(orderId);
+        ProductEntity product = productService.findBySum(order.getSum());
+        return creditRequestService.createRequestByOrderAndProduct(order,product);
     }
 
     @GetMapping("/request")
