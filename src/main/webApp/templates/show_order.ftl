@@ -9,4 +9,6 @@
 <form action="/request/new?orderId=${order.id}" method="post"}">
     <input type="submit" value="Взять кредит"/>
 </form>
+
+<a href="/logout">Logout</a>
 </html>

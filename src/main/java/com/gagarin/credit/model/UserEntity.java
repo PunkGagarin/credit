@@ -2,11 +2,12 @@ package com.gagarin.credit.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(schema = "credit2", name = "user")
-public class UserEntity {
+public class UserEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +27,7 @@ public class UserEntity {
 
     @NotNull
     @NotEmpty(message = "User password cannot be empty!")
+    @Size(min = 7, message = "Minimum 7 symbols")
     private String password;
 
     @OneToMany(mappedBy = "user")

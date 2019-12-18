@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Controller
 public class CreditController {
 
@@ -25,28 +27,36 @@ public class CreditController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/home/{name}")
-    public String home(@PathVariable("name") String name, Model model) {
-        model.addAttribute("msg", "Привет " + name);
-        return "index";
+    @GetMapping("/users/new")
+    public String signUp() {
+        return "/auth/sign_up";
     }
 
-    @GetMapping("/users/new")
-    public String signUp(){
-        return "sign_up";
+    @GetMapping("/make_order")
+    public String getNewOrder(Model model){
+        model.addAttribute("order", new OrderEntity());
+        return "/make_order";
+    }
+
+    @PostMapping("/make_order")
+    public String makeOrder(@ModelAttribute @Valid OrderEntity order){
+        //TODO: валидация
+        orderService.createOrder(order);
+        return "/auth/sign_in";
     }
 
     @GetMapping("/orders")
     public String getOrders(@RequestParam(value = "orderId", required = false) Long orderId, Model model) {
-        model.addAttribute("order", orderService.getOrder(orderId));
-        return "order";
+        if (orderId != null)
+            model.addAttribute("order", orderService.getOrder(orderId));
+        return "show_order";
     }
 
     @PostMapping("/request/new")
-    public String createRequest(@RequestParam("orderId") Long orderId ,Model model) {
+    public String createRequest(@RequestParam("orderId") Long orderId, Model model) {
         //createRequest
 
-        return String.format("redirect:/request?reqId=%d",1);
+        return String.format("redirect:/request?reqId=%d", 1);
     }
 
     @GetMapping("/request")

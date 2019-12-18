@@ -35,9 +35,4 @@ public class WebConfig implements WebMvcConfigurer {
         }});
         return configurer;
     }
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("index");
-    }
 }

@@ -7,27 +7,15 @@
 <@sf.form action="/sign_up" method="post" modelAttribute="user">
 
     <div>
-        <@sf.label path="name">Name</@sf.label>
-        <@sf.input path="name"/>
-        <@sf.errors path="name"/>
+        <@sf.label path="fio">FIO</@sf.label>
+        <@sf.input path="fio"/>
+        <@sf.errors path="fio"/>
     </div>
 
     <div>
-        <@sf.label path="surName">SurName</@sf.label>
-        <@sf.input path="surName"/>
-        <@sf.errors path="surName"/>
-    </div>
-
-    <div>
-        <@sf.label path="age">Age</@sf.label>
-        <@sf.input path="age"/>
-        <@sf.errors path="age"/>
-    </div>
-
-    <div>
-        <@sf.label path="email">Email</@sf.label>
-        <@sf.input path="email"/>
-        <@sf.errors path="email"/>
+        <@sf.label path="login">Login</@sf.label>
+        <@sf.input path="login"/>
+        <@sf.errors path="login"/>
     </div>
 
     <div>

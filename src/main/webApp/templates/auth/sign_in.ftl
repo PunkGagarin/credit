@@ -3,17 +3,28 @@
 <#macro content>
     <form action="/login/process" method="post">
         <div>
-            Email: <input name="email" type="email">
+            Login: <input name="login" type="login">
         </div>
 
         <div>
             Password: <input name="password" type="password">
         </div>
+        <table>
+            <tr>
+                <td>
+                    <input type="submit"/>
+                </td>
+                <td>
+                    <form action="/sign_up">
+                        <input type="button" value="Sign Up">
+                    </form>
+                </td>
+            </tr>
+        </table>
 
-        <input type="submit"/>
     </form>
     <#if error??>
-        <b> Bad credentials</b>
+        <b> Wrong login or password </b>
     </#if>
 </#macro>
 <@main title="Login"/>

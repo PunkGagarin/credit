@@ -1,7 +1,6 @@
 package com.gagarin.credit.config;
 
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -28,9 +27,9 @@ import java.util.Properties;
 public class AppConfig {
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource);
+        em.setDataSource(dataSource());
         em.setPackagesToScan("com.gagarin.credit.model");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
@@ -40,16 +39,14 @@ public class AppConfig {
         return em;
     }
 
+    //TODO: вынести в отдельный файл
     @Bean
-    public DataSource dataSource(@Value("${jdbc.driver}") String driver,
-                                 @Value("${jdbc.url}") String url,
-                                 @Value("${jdbc.user}") String user,
-                                 @Value("${jdbc.password}") String password) {
+    public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(driver);
-        dataSource.setUrl(url);
-        dataSource.setUsername(user);
-        dataSource.setPassword(password);
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/credit2?serverTimezone=UTC&createDatabaseIfNotExist=true");
+        dataSource.setUsername("root");
+        dataSource.setPassword("root");
         return dataSource;
     }
 
@@ -69,8 +66,8 @@ public class AppConfig {
     private Properties additionalProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
-        properties.setProperty("show_sq", "true");
+        properties.setProperty("hibernate.hbm2ddl.auto","update");
+        properties.setProperty("show_sq","true");
 
         return properties;
     }
