@@ -39,5 +39,7 @@ public class OrderRepositoryTest {
         List<OrderEntity> orders = orderRepository.findAll();
         Assert.assertNotNull("Список не должен быть пустым", orders);
         Assert.assertTrue("Список не должен быть пустым", orders.size() > 0);
+
+        orderRepository.delete(order);
     }
 }

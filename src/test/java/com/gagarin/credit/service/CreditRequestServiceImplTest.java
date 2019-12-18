@@ -26,11 +26,11 @@ public class CreditRequestServiceImplTest {
         OrderEntity orderEntity = new OrderEntity(100000, 10);
         orderEntity.setUser(new UserEntity("Tested Test Testedov", "tester", "123456"));
         ProductEntity productEntity = new ProductEntity(30000, 100000, 5, 24, 10);
-        Double expectedRate = 11.1;
+        Double expectedRate = 13.3;
 
         CreditRequestEntity request =  creditRequestService.createRequestByOrderAndProduct(orderEntity, productEntity);
 
-        Assert.assertEquals("Should be 11.1", expectedRate, request.getRate());
+        Assert.assertEquals("Should be 13.3", expectedRate, request.getRate());
     }
 
 }

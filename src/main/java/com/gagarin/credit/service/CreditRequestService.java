@@ -13,4 +13,6 @@ public interface CreditRequestService {
     CreditRequestEntity createRequest(CreditRequestEntity creditRequest);
 
     CreditRequestEntity createRequestByOrderAndProduct(OrderEntity order, ProductEntity product);
+
+    CreditRequestEntity findById(Long id);
 }

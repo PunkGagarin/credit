@@ -4,7 +4,6 @@ import com.gagarin.credit.model.CreditRequestEntity;
 import com.gagarin.credit.model.OrderEntity;
 import com.gagarin.credit.model.ProductEntity;
 import com.gagarin.credit.repository.CreditRequestRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,12 +41,12 @@ public class CreditRequestServiceImpl implements CreditRequestService {
     }
 
     private Double findRateByOrder(OrderEntity order, ProductEntity product) {
-        int discount = order.getDiscount();
-        double discountSum = order.getSum() -  (order.getSum() * discount / 100);
+        double discountSum = order.getSum() - (order.getSum() * order.getDiscount() / 100);
         double finalRate = 0;
 
         for (double currentRate = product.getMinRate(); currentRate <= product.getMaxRate(); currentRate += 0.1) {
-            double sumBetween = order.getSum() - (discountSum * (currentRate / 100) + discountSum);
+            double currentSum = (discountSum * (currentRate / 100) / 12 * product.getTerm()) + discountSum;
+            double sumBetween = order.getSum() - currentSum;
             if (sumBetween < 0)
                 break;
             finalRate = round(currentRate);
@@ -55,9 +54,15 @@ public class CreditRequestServiceImpl implements CreditRequestService {
         return finalRate;
     }
 
-    private double round(double number){
-        double val = number*10;
+    private double round(double number) {
+        double val = number * 10;
         val = Math.round(val);
-        return val/10;
+        return val / 10;
+    }
+
+    @Override
+    public CreditRequestEntity findById(Long id) {
+        return new CreditRequestEntity(new Date(), 10000.00, 5.0, "bla");
+//        return creditRequestRepository.findById(id).orElse(null);
     }
 }
