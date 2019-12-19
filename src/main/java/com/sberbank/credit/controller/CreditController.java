@@ -34,11 +34,6 @@ public class CreditController {
         return "redirect:/make_order";
     }
 
-    @GetMapping("/users/new")
-    public String signUp() {
-        return "/auth/sign_up";
-    }
-
     @GetMapping("/make_order")
     public String getNewOrder(Model model) {
         model.addAttribute("order", new OrderEntity());

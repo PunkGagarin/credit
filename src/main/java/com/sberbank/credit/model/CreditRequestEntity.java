@@ -26,7 +26,7 @@ public class CreditRequestEntity {
     @Column(name = "userLogin")
     private String userLogin;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private OrderEntity order;
 

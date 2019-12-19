@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 //TODO: добавить верные странички
                 .antMatchers("/sign_up", "/login", "/make_order").anonymous()
-                .antMatchers("/make_order", "/orders", "/request/new", "/request", "/users/new").authenticated()
+                .antMatchers("/orders", "/request/new", "/request", "/users/new").authenticated()
                 .and().csrf().disable()
                 .formLogin()
                 .loginPage("/login")
