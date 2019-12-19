@@ -1,8 +1,8 @@
-package com.gagarin.credit.repository;
+package com.sberbank.credit.repository;
 
-import com.gagarin.credit.config.AppConfig;
-import com.gagarin.credit.config.SecurityConfig;
-import com.gagarin.credit.model.OrderEntity;
+import com.sberbank.credit.config.AppConfig;
+import com.sberbank.credit.config.SecurityConfig;
+import com.sberbank.credit.model.OrderEntity;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

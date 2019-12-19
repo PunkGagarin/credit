@@ -1,6 +1,6 @@
-package com.gagarin.credit.config;
+package com.sberbank.credit.config;
 
-import com.gagarin.credit.security.AuthProviderImpl;
+import com.sberbank.credit.security.AuthProviderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan("com.gagarin.credit.security")
+@ComponentScan("com.sberbank.credit.security")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

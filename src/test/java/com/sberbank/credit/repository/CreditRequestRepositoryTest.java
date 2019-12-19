@@ -1,7 +1,7 @@
-package com.gagarin.credit.repository;
+package com.sberbank.credit.repository;
 
-import com.gagarin.credit.config.AppConfig;
-import com.gagarin.credit.config.SecurityConfig;
+import com.sberbank.credit.config.AppConfig;
+import com.sberbank.credit.config.SecurityConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

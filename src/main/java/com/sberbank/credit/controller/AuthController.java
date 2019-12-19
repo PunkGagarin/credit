@@ -1,7 +1,7 @@
-package com.gagarin.credit.controller;
+package com.sberbank.credit.controller;
 
-import com.gagarin.credit.model.UserEntity;
-import com.gagarin.credit.service.UserService;
+import com.sberbank.credit.model.UserEntity;
+import com.sberbank.credit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

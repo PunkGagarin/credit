@@ -12,7 +12,7 @@
         <table>
             <tr>
                 <td>
-                    <input type="submit"/>
+                    <input type="submit" value="Log In"/>
                 </td>
                 <td>
                     <form action="/sign_up">

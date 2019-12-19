@@ -1,6 +1,6 @@
-package com.gagarin.credit.service;
+package com.sberbank.credit.service;
 
-import com.gagarin.credit.model.OrderEntity;
+import com.sberbank.credit.model.OrderEntity;
 
 import java.util.List;
 

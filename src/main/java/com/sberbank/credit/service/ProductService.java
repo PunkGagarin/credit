@@ -1,6 +1,6 @@
-package com.gagarin.credit.service;
+package com.sberbank.credit.service;
 
-import com.gagarin.credit.model.ProductEntity;
+import com.sberbank.credit.model.ProductEntity;
 
 public interface ProductService {
 

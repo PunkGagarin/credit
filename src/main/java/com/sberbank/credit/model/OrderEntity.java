@@ -1,4 +1,4 @@
-package com.gagarin.credit.model;
+package com.sberbank.credit.model;
 
 
 import javax.persistence.*;

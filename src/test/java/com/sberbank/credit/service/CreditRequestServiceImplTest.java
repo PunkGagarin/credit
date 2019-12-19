@@ -1,16 +1,15 @@
-package com.gagarin.credit.service;
+package com.sberbank.credit.service;
 
-import com.gagarin.credit.config.AppConfig;
-import com.gagarin.credit.config.SecurityConfig;
-import com.gagarin.credit.model.CreditInfo;
-import com.gagarin.credit.model.CreditRequestEntity;
-import com.gagarin.credit.model.OrderEntity;
-import com.gagarin.credit.model.ProductEntity;
-import com.gagarin.credit.repository.CreditRequestRepository;
+import com.sberbank.credit.config.AppConfig;
+import com.sberbank.credit.config.SecurityConfig;
+import com.sberbank.credit.model.CreditInfo;
+import com.sberbank.credit.model.CreditRequestEntity;
+import com.sberbank.credit.model.OrderEntity;
+import com.sberbank.credit.model.ProductEntity;
+import com.sberbank.credit.repository.CreditRequestRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;

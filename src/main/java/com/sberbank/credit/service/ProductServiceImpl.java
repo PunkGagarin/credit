@@ -1,13 +1,12 @@
-package com.gagarin.credit.service;
+package com.sberbank.credit.service;
 
-import com.gagarin.credit.model.ProductEntity;
-import com.gagarin.credit.repository.ProductRepository;
+import com.sberbank.credit.model.ProductEntity;
+import com.sberbank.credit.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.function.Predicate;
 
 @Service("productService")
 @Transactional

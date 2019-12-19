@@ -1,4 +1,4 @@
-package com.gagarin.credit.config;
+package com.sberbank.credit.config;
 
 
 import org.springframework.context.annotation.Bean;
@@ -21,8 +21,8 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("com.gagarin.credit.service")
-@EnableJpaRepositories(basePackages = "com.gagarin.credit.repository")
+@ComponentScan("com.sberbank.credit.service")
+@EnableJpaRepositories(basePackages = "com.sberbank.credit.repository")
 @PropertySource("classpath:persistence.properties")
 public class AppConfig {
 
@@ -30,7 +30,7 @@ public class AppConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.gagarin.credit.model");
+        em.setPackagesToScan("com.sberbank.credit.model");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

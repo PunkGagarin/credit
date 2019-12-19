@@ -1,6 +1,6 @@
-package com.gagarin.credit.repository;
+package com.sberbank.credit.repository;
 
-import com.gagarin.credit.model.CreditRequestEntity;
+import com.sberbank.credit.model.CreditRequestEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CreditRequestRepository extends JpaRepository<CreditRequestEntity, Long> {

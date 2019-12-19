@@ -1,9 +1,8 @@
-package com.gagarin.credit.model;
+package com.sberbank.credit.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(schema = "credit2", name = "user")

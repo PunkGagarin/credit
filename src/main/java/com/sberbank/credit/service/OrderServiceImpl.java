@@ -1,7 +1,7 @@
-package com.gagarin.credit.service;
+package com.sberbank.credit.service;
 
-import com.gagarin.credit.model.OrderEntity;
-import com.gagarin.credit.repository.OrderRepository;
+import com.sberbank.credit.model.OrderEntity;
+import com.sberbank.credit.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

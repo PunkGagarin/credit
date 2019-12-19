@@ -1,7 +1,7 @@
-package com.gagarin.credit.service;
+package com.sberbank.credit.service;
 
-import com.gagarin.credit.model.UserEntity;
-import com.gagarin.credit.repository.UserRepository;
+import com.sberbank.credit.model.UserEntity;
+import com.sberbank.credit.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

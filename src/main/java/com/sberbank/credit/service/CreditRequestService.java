@@ -1,9 +1,9 @@
-package com.gagarin.credit.service;
+package com.sberbank.credit.service;
 
-import com.gagarin.credit.model.CreditInfo;
-import com.gagarin.credit.model.CreditRequestEntity;
-import com.gagarin.credit.model.OrderEntity;
-import com.gagarin.credit.model.ProductEntity;
+import com.sberbank.credit.model.CreditInfo;
+import com.sberbank.credit.model.CreditRequestEntity;
+import com.sberbank.credit.model.OrderEntity;
+import com.sberbank.credit.model.ProductEntity;
 
 import java.util.List;
 
