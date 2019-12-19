@@ -24,8 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 //TODO: добавить верные странички
-                .antMatchers("/sign_up", "/login","/make_order").anonymous()
-                .antMatchers("/orders", "/request/new", "/request","/users/new").authenticated()
+                .antMatchers("/sign_up", "/login", "/make_order").anonymous()
+                .antMatchers("/make_order", "/orders", "/request/new", "/request", "/users/new").authenticated()
                 .and().csrf().disable()
                 .formLogin()
                 .loginPage("/login")
@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error=true")
 //                .and()
 //                .exceptionHandling()
-//                .accessDeniedHandler("")
+//                .accessDeniedHandler("/orders?id=1")
                 .and().logout();
 
 
@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

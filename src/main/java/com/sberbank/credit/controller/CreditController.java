@@ -48,8 +48,8 @@ public class CreditController {
     @PostMapping("/make_order")
     public String makeOrder(@ModelAttribute @Valid OrderEntity order) {
         //TODO: валидация
-        orderService.createOrder(order);
-        return String.format("redirect:/sign_in?orderId=%d", order.getId());
+        OrderEntity orderEntity = orderService.createOrder(order);
+        return String.format("redirect:/login?orderId=%d", orderEntity.getId());
     }
 
     @GetMapping("/orders")

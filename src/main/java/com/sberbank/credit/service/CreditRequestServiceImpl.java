@@ -37,9 +37,8 @@ public class CreditRequestServiceImpl implements CreditRequestService {
         creditRequest.setOrder(order);
         creditRequest.setCreateDate(new Date());
         creditRequest.setRate(findRateByOrder(order, product));
+        //TODO:Count Sum properly
         creditRequest.setSum((order.getSum() * (creditRequest.getRate() / 100)) + order.getSum());
-//        creditRequest.setUserLogin(order.getUser().getLogin());
-
 
         return creditRequest;
     }

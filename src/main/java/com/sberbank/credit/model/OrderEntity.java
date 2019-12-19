@@ -10,7 +10,6 @@ import javax.validation.constraints.Positive;
 public class OrderEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Positive
     @Column(name = "id")
     private Long id;

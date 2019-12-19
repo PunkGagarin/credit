@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.Optional;
 
@@ -27,7 +28,10 @@ public class CreditRequestServiceImplTest {
     @Autowired
     private CreditRequestService creditRequestService;
 
-    @Mock
+//    @Mock
+//    private CreditRequestRepository creditRequestRepository;
+
+    @Autowired
     private CreditRequestRepository creditRequestRepository;
 
 //    @Bean
@@ -37,6 +41,7 @@ public class CreditRequestServiceImplTest {
 //    }
 
     @Test
+    @Transactional
     public void testCreateRequestByOrderAndProduct(){
         OrderEntity orderEntity = new OrderEntity(100000.00, 10,"some goods");
         ProductEntity productEntity = new ProductEntity(30000, 100000, 5, 24, 10);
@@ -45,6 +50,8 @@ public class CreditRequestServiceImplTest {
         CreditRequestEntity request =  creditRequestService.createRequestByOrderAndProduct(orderEntity, productEntity);
 
         Assert.assertEquals("Should be 13.3", expectedRate, request.getRate());
+
+        creditRequestRepository.save(request);
     }
 
     @Test
