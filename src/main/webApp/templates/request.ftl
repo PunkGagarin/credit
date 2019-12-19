@@ -1,10 +1,39 @@
 <html>
 <head>
-    <title>request</title>
+    <title>Credit Info</title>
 </head>
 <body>
-<li>${request.sum}</li>
-<li>${request.rate}</li>
+<table>
+    <tr>
+        <th>
+            Month
+        </th>
+        <th>
+            Current Rate
+        </th>
+        <th>
+            Current Sum
+        </th>
+        <th>
+            Sum Left
+        </th>
+    </tr>
+    <tr>
+        <td>
+            ${creditInfo.monthPast}
+        </td>
+        <td>
+            ${creditInfo.currentRateSum}
+        </td>
+        <td>
+            ${creditInfo.totalSum}
+        </td>
+        <td>
+            ${creditInfo.sumLeft}
+        </td>
+    </tr>
+</table>
+
 
 </body>
 </html>

@@ -29,9 +29,6 @@ public class ProductEntity {
     @Column(name = "term")
     private int term;
 
-    @ManyToMany(mappedBy = "basketProducts")
-    private Set<BasketEntity> baskets;
-
     public ProductEntity() {
     }
 
@@ -89,13 +86,5 @@ public class ProductEntity {
 
     public void setTerm(int term) {
         this.term = term;
-    }
-
-    public Set<BasketEntity> getBaskets() {
-        return baskets;
-    }
-
-    public void setBaskets(Set<BasketEntity> baskets) {
-        this.baskets = baskets;
     }
 }

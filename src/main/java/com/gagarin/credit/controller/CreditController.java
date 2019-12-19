@@ -29,22 +29,27 @@ public class CreditController {
     @Autowired
     private ProductService productService;
 
+    @GetMapping("/")
+    public String homePage() {
+        return "redirect:/make_order";
+    }
+
     @GetMapping("/users/new")
     public String signUp() {
         return "/auth/sign_up";
     }
 
     @GetMapping("/make_order")
-    public String getNewOrder(Model model){
+    public String getNewOrder(Model model) {
         model.addAttribute("order", new OrderEntity());
-        return "/make_order";
+        return "make_order";
     }
 
     @PostMapping("/make_order")
-    public String makeOrder(@ModelAttribute @Valid OrderEntity order){
+    public String makeOrder(@ModelAttribute @Valid OrderEntity order) {
         //TODO: валидация
         orderService.createOrder(order);
-        return "/auth/sign_in";
+        return String.format("redirect:/sign_in?orderId=%d", order.getId());
     }
 
     @GetMapping("/orders")
@@ -57,20 +62,25 @@ public class CreditController {
     @PostMapping("/request/new")
     public String createRequest(@RequestParam("orderId") Long orderId, Model model) {
         //saveRequest
-        creditRequestService.saveRequest(createRequestByOrderId(orderId));
-
-        return String.format("redirect:/request?reqId=%d", 1);
+        //TODO: переносить в сервис или оставить здесь, т.к. абстракция выше сервисной?
+        CreditRequestEntity request = creditRequestService.saveRequest(createRequestByOrderId(orderId));
+        return String.format("redirect:/request?reqId=%d", request.getId());
     }
 
     private CreditRequestEntity createRequestByOrderId(Long orderId) {
         OrderEntity order = orderService.getOrder(orderId);
         ProductEntity product = productService.findBySum(order.getSum());
-        return creditRequestService.createRequestByOrderAndProduct(order,product);
+        return creditRequestService.createRequestByOrderAndProduct(order, product);
     }
 
     @GetMapping("/request")
     public String getRequest(@RequestParam("reqId") Long reqId, Model model) {
-        model.addAttribute("request", creditRequestService.findById(reqId));
+        try {
+            model.addAttribute("creditInfo", creditRequestService.getCreditInfo(reqId));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return "request";
     }
 }

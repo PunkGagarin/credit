@@ -30,9 +30,6 @@ public class UserEntity implements Serializable {
     @Size(min = 7, message = "Minimum 7 symbols")
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    private Set<OrderEntity> orders;
-
     public UserEntity() {
     }
 
@@ -73,14 +70,4 @@ public class UserEntity implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public Set<OrderEntity> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<OrderEntity> orders) {
-        this.orders = orders;
-    }
-
-    //TODO: eq, hc, including relations or not?
 }

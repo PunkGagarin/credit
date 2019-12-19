@@ -25,22 +25,19 @@ public class OrderEntity {
     @Column(name = "discount")
     private int discount;
 
-    @OneToOne(mappedBy = "order")
-    private BasketEntity basketEntity;
+    @Column(name = "goods")
+    private String goods;
 
     @OneToOne(mappedBy = "order")
     private CreditRequestEntity creditRequest;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity user;
-
     public OrderEntity() {
     }
 
-    public OrderEntity(@Positive @NotNull double sum, int discount) {
+    public OrderEntity(@Positive @NotNull Double sum, int discount, String goods) {
         this.sum = sum;
         this.discount = discount;
+        this.goods = goods;
     }
 
     public Long getId() {
@@ -67,20 +64,12 @@ public class OrderEntity {
         this.discount = discount;
     }
 
-    public BasketEntity getBasketEntity() {
-        return basketEntity;
+    public String getGoods() {
+        return goods;
     }
 
-    public void setBasketEntity(BasketEntity basketEntity) {
-        this.basketEntity = basketEntity;
-    }
-
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setGoods(String goods) {
+        this.goods = goods;
     }
 
     public CreditRequestEntity getCreditRequest() {

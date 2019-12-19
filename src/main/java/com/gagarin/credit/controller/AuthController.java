@@ -19,7 +19,7 @@ public class AuthController {
     @GetMapping("/sign_up")
     public String getSignUp(Model model){
         model.addAttribute("user", new UserEntity());
-        return "/auth/sign_up";
+        return "auth/sign_up";
     }
 
     @PostMapping("/sign_up")

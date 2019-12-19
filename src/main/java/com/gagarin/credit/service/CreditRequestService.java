@@ -1,5 +1,6 @@
 package com.gagarin.credit.service;
 
+import com.gagarin.credit.model.CreditInfo;
 import com.gagarin.credit.model.CreditRequestEntity;
 import com.gagarin.credit.model.OrderEntity;
 import com.gagarin.credit.model.ProductEntity;
@@ -15,4 +16,6 @@ public interface CreditRequestService {
     CreditRequestEntity createRequestByOrderAndProduct(OrderEntity order, ProductEntity product);
 
     CreditRequestEntity findById(Long id);
+
+    CreditInfo getCreditInfo(Long creditId) throws Exception;
 }

@@ -1,5 +1,6 @@
 package com.gagarin.credit.service;
 
+import com.gagarin.credit.model.CreditInfo;
 import com.gagarin.credit.model.CreditRequestEntity;
 import com.gagarin.credit.model.OrderEntity;
 import com.gagarin.credit.model.ProductEntity;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Service("creditRequest")
@@ -33,9 +36,10 @@ public class CreditRequestServiceImpl implements CreditRequestService {
         CreditRequestEntity creditRequest = new CreditRequestEntity();
         creditRequest.setOrder(order);
         creditRequest.setCreateDate(new Date());
-        creditRequest.setSum(order.getSum());
-        creditRequest.setUserLogin(order.getUser().getLogin());
         creditRequest.setRate(findRateByOrder(order, product));
+        creditRequest.setSum((order.getSum() * (creditRequest.getRate() / 100)) + order.getSum());
+//        creditRequest.setUserLogin(order.getUser().getLogin());
+
 
         return creditRequest;
     }
@@ -65,4 +69,50 @@ public class CreditRequestServiceImpl implements CreditRequestService {
         return new CreditRequestEntity(new Date(), 10000.00, 5.0, "bla");
 //        return creditRequestRepository.findById(id).orElse(null);
     }
+
+    public CreditInfo getCreditInfo(Long creditId) throws Exception {
+        CreditRequestEntity creditRequest = creditRequestRepository.findById(creditId).orElseThrow(Exception::new);
+        return createCreditInfo(creditRequest);
+    }
+
+    private CreditInfo createCreditInfo(CreditRequestEntity creditRequest) {
+        CreditInfo creditInfo = new CreditInfo();
+        creditInfo.setCreateDate(creditRequest.getCreateDate());
+        creditInfo.setCurrentDate(new Date());
+        //TODO:
+//        creditInfo.setMonthPast(getMonthPast(creditInfo.getCreateDate(), creditInfo.getCurrentDate()));
+        creditInfo.setMonthPast(3);
+
+        creditInfo.setTotalSum(creditRequest.getSum());
+        creditInfo.setRate(creditRequest.getRate());
+        creditInfo.setCurrentRateSum(getCurrentRateSum(creditInfo));
+        //TODO:
+        creditInfo.setSumLeft(creditInfo.getTotalSum());
+
+        return creditInfo;
+    }
+
+    private double getSumLeft(CreditInfo creditInfo) {
+        return 0;
+    }
+
+    private double getCurrentRateSum(CreditInfo creditInfo) {
+        return creditInfo.getTotalSum() * (creditInfo.getRate() / 100) * creditInfo.getMonthPast();
+    }
+
+
+    private int getMonthPast(Date createDate, Date currentDate) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(createDate);
+        int firstMonth = calendar.get(Calendar.MONTH);
+        calendar.setTime(currentDate);
+        return calendar.get(Calendar.MONTH) - firstMonth;
+    }
+
+//    private Date getCurrentDate(Date createDate) {
+//        Calendar calendar = new GregorianCalendar();
+//        calendar.setTime(createDate);
+//
+//
+//    }
 }
