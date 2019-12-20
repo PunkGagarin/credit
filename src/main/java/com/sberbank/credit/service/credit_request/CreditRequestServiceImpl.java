@@ -32,7 +32,6 @@ public class CreditRequestServiceImpl implements CreditRequestService {
 
     @Override
     public CreditRequestEntity findById(Long id) {
-//        return new CreditRequestEntity(new Date(), 10000.00, 5.0, 6, "bla");
         return creditRequestRepository.findById(id).orElse(null);
     }
 

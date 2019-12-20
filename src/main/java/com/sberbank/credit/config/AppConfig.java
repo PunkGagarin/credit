@@ -36,11 +36,6 @@ public class AppConfig {
 
             prop = new Properties();
 
-            if (input == null) {
-
-            }
-
-            //load a properties file from class path, inside static method
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -85,7 +80,7 @@ public class AppConfig {
 
     private Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        properties.setProperty("hibernate.dialect", prop.get("hibernate.dialect").toString());
         properties.setProperty("hibernate.hbm2ddl.auto", "create");
         properties.setProperty("show_sq", "true");
 

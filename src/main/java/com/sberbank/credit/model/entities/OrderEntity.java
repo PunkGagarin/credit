@@ -1,12 +1,14 @@
 package com.sberbank.credit.model.entities;
 
 
+import com.sberbank.credit.config.constants.CreditConstants;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Entity
-@Table(schema = "credit2", name = "orders")
+@Table(schema = CreditConstants.CREDIT, name = "orders")
 public class OrderEntity {
 
     @Id

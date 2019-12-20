@@ -1,12 +1,14 @@
 package com.sberbank.credit.model.entities;
 
+import com.sberbank.credit.config.constants.CreditConstants;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 import java.util.Date;
 
 @Entity
-@Table(schema = "credit2", name = "credit_request")
+@Table(schema = CreditConstants.CREDIT, name = "credit_request")
 public class CreditRequestEntity {
 
     @Id

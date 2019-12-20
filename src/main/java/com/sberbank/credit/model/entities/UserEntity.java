@@ -1,11 +1,13 @@
 package com.sberbank.credit.model.entities;
 
+import com.sberbank.credit.config.constants.CreditConstants;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 
 @Entity
-@Table(schema = "credit2", name = "user")
+@Table(schema = CreditConstants.CREDIT, name = "user")
 public class UserEntity implements Serializable {
 
     @Id
