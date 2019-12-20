@@ -1,6 +1,6 @@
 package com.sberbank.credit.model.entities;
 
-import com.sberbank.credit.config.constants.CreditConstants;
+import com.sberbank.credit.constants.CreditConstants;
 
 import javax.persistence.*;
 import java.io.Serializable;

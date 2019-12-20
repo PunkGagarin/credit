@@ -31,8 +31,6 @@ public class CreditRequestServiceImplTest {
     @Autowired
     private CreditRequestRepository creditRequestRepository;
 
-    Converter orderConverter = new OrderConverter();
-
     private Long creditId;
     private CreditRequestEntity request;
     private OrderEntity orderEntity;

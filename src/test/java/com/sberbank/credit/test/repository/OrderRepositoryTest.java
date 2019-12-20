@@ -20,11 +20,6 @@ public class OrderRepositoryTest {
     private OrderRepository orderRepository;
 
     @Test
-    public void testOrderRepository() {
-        orderRepository.findAll();
-    }
-
-    @Test
     public void testCreateOrder() {
         OrderEntity order = new OrderEntity(10000d, 10, "some goods");
         order.setId(106L);

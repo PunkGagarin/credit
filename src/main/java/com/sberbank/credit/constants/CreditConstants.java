@@ -1,4 +1,4 @@
-package com.sberbank.credit.config.constants;
+package com.sberbank.credit.constants;
 
 public interface CreditConstants {
     String CREDIT = "credit";
