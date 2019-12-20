@@ -18,13 +18,10 @@ public class UserEntity implements Serializable {
     @Column(name = "fio")
     private String fio;
 
-    @Size(max = 50)
     @Column(name = "login")
     private String login;
 
-    @NotNull
-    @NotEmpty(message = "User password cannot be empty!")
-    @Size(min = 7, message = "Minimum 7 symbols")
+    @Column(name = "password")
     private String password;
 
     public UserEntity() {

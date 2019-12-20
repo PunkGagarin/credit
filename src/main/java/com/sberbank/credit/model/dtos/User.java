@@ -5,30 +5,24 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    private Long id;
-
     private String fio;
 
+    @NotNull
+    @NotEmpty(message = "User login cannot not be empty!")
     private String login;
 
+    @NotNull
+    @NotEmpty(message = "User password cannot be empty!")
+    @Size(min = 6, message = "Minimum 6 symbols")
     private String password;
 
     public User() {
     }
 
-    public User(Long id, String fio, String login, String password) {
-        this.id = id;
+    public User( String fio, String login, String password) {
         this.fio = fio;
         this.login = login;
         this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFio() {

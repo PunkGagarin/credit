@@ -31,7 +31,6 @@ public class UserConverterTest {
         Assert.assertEquals("Must be equals", entities.get(0).getFio(), dtos.get(0).getFio());
         Assert.assertEquals("Must be equals", entities.get(0).getLogin(), dtos.get(0).getLogin());
         Assert.assertEquals("Must be equals", entities.get(0).getPassword(), dtos.get(0).getPassword());
-        Assert.assertEquals("Must be equals", entities.get(0).getId(), dtos.get(0).getId());
     }
 
 

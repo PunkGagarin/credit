@@ -18,11 +18,11 @@ public class AuthController {
 
     public static final String SIGN_UP_ENDPOINT = "/sign_up";
 
-    public static final String SIGN_UP_VIEW = "auth/sign_up";
+    public static final String SIGN_UP_VIEW = "/auth/sign_up";
 
     public static final String LOGIN_ENDPOINT = "/login";
 
-    public static final String LOGIN_VIEW = "auth/sign_in";
+    public static final String LOGIN_VIEW = "/auth/sign_in";
 
 
     @Autowired
@@ -43,7 +43,7 @@ public class AuthController {
     @PostMapping(SIGN_UP_ENDPOINT)
     public String signUp(@ModelAttribute @Valid User user, BindingResult result) {
         if (result.hasErrors())
-            return SIGN_UP_ENDPOINT;
+            return SIGN_UP_VIEW;
         userService.addUser(userConverter.convertToEntity(user));
         return "redirect:" + LOGIN_ENDPOINT;
     }
