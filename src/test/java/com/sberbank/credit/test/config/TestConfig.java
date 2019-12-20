@@ -2,7 +2,9 @@ package com.sberbank.credit.test.config;
 
 import com.sberbank.credit.config.AppConfig;
 import com.sberbank.credit.repository.CreditRequestRepository;
+import com.sberbank.credit.repository.UserRepository;
 import com.sberbank.credit.service.credit_request.CreditRequestServiceImpl;
+import com.sberbank.credit.service.user.UserServiceImpl;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.*;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
@@ -25,7 +27,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@Import(CreditRequestServiceImpl.class)
+@Import({CreditRequestServiceImpl.class, UserServiceImpl.class})
 @ComponentScan(basePackages = {"com.sberbank.credit.model.dtos"})
 @EnableJpaRepositories
 public class TestConfig {
@@ -96,6 +98,12 @@ public class TestConfig {
     @Primary
     CreditRequestRepository creditRequestRepository() {
         return Mockito.mock(CreditRequestRepository.class);
+    }
+
+    @Bean
+    @Primary
+    UserRepository userRepository() {
+        return Mockito.mock(UserRepository.class);
     }
 
 }

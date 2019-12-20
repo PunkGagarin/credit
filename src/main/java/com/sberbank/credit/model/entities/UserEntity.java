@@ -3,7 +3,6 @@ package com.sberbank.credit.model.entities;
 import com.sberbank.credit.config.constants.CreditConstants;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 
 @Entity
@@ -21,13 +20,13 @@ public class UserEntity implements Serializable {
     @Column(name = "login")
     private String login;
 
-    @Column(name = "password")
+    @Column(name = "password",length = 255)
     private String password;
 
     public UserEntity() {
     }
 
-    public UserEntity(String fio, @Size(max = 50) @NotNull @NotEmpty(message = "User login must not be empty!") String login, @NotNull @NotEmpty(message = "User password cannot be empty!") String password) {
+    public UserEntity(String fio, String login, String password) {
         this.fio = fio;
         this.login = login;
         this.password = password;
