@@ -1,7 +1,7 @@
 <#include "../main-template.ftl"/>
 
 <#macro content>
-    <form action="/login?orderId=#{orderId!1}" method="post">
+    <form action="/login?orderId=#{orderId!currentOrderId}" method="post">
         <div>
             Login: <input name="login" type="login">
         </div>

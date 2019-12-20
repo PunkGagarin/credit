@@ -1,5 +1,6 @@
 package com.sberbank.credit.controller;
 
+import com.sberbank.credit.model.dtos.Order;
 import com.sberbank.credit.model.dtos.User;
 import com.sberbank.credit.model.dtos.converters.Converter;
 import com.sberbank.credit.model.entities.UserEntity;
@@ -31,6 +32,7 @@ public class AuthController {
     private Converter<UserEntity, User> userConverter;
 
     private static User currentUser;
+    private static Long currentOrderId;
 
     @GetMapping(SIGN_UP_ENDPOINT)
     public String getSignUp(Model model) {
@@ -40,7 +42,8 @@ public class AuthController {
 
     @PostMapping(SIGN_UP_ENDPOINT)
     public String signUp(@ModelAttribute @Valid User user, BindingResult result) {
-        //TODO: Валидация
+        if (result.hasErrors())
+            return SIGN_UP_ENDPOINT;
         userService.addUser(userConverter.convertToEntity(user));
         return "redirect:" + LOGIN_ENDPOINT;
     }
@@ -53,6 +56,9 @@ public class AuthController {
 
         if (orderId != null)
             model.addAttribute("orderId", orderId);
+
+        if(currentOrderId != null)
+            model.addAttribute("currentOrderId",currentOrderId);
 
         return LOGIN_VIEW;
     }
@@ -75,5 +81,9 @@ public class AuthController {
 
     public static User getCurrentUser() {
         return currentUser;
+    }
+
+    public static void setCurrentOrderId(Long currentOrderId) {
+        AuthController.currentOrderId = currentOrderId;
     }
 }

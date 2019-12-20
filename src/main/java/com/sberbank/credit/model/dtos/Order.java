@@ -1,11 +1,15 @@
 package com.sberbank.credit.model.dtos;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 
 public class Order implements Serializable {
 
+    @Positive
     private Long id;
 
+    @Positive
     private Double sum;
 
     private Integer discount;

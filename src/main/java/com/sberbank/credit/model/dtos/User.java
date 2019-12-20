@@ -1,5 +1,6 @@
 package com.sberbank.credit.model.dtos;
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 public class User implements Serializable {

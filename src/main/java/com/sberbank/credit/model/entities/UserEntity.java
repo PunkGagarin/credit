@@ -13,8 +13,6 @@ public class UserEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @Positive
-    @Min(1L)
     private Long id;
 
     @Column(name = "fio")
@@ -22,8 +20,6 @@ public class UserEntity implements Serializable {
 
     @Size(max = 50)
     @Column(name = "login")
-    @NotNull
-    @NotEmpty(message = "User login must not be empty!")
     private String login;
 
     @NotNull

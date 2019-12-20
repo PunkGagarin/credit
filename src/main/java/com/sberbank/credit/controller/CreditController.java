@@ -11,6 +11,7 @@ import com.sberbank.credit.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,6 +56,7 @@ public class CreditController {
 
 
 
+
     @GetMapping("/")
     public String homePage() {
         return "redirect:" + MAKE_ORDER_ENDPOINT;
@@ -67,8 +69,10 @@ public class CreditController {
     }
 
     @PostMapping(MAKE_ORDER_ENDPOINT)
-    public String makeOrder(@ModelAttribute @Valid Order order) {
-        //TODO: валидация
+    public String makeOrder(@ModelAttribute @Valid Order order, BindingResult result) {
+        if(result.hasErrors())
+            return MAKE_ORDER_ENDPOINT;
+        AuthController.setCurrentOrderId(order.getId());
         orderService.createOrder(orderConverter.convertToEntity(order));
         return String.format("redirect:/login?%s=%d", ORDER_ID, order.getId());
     }
