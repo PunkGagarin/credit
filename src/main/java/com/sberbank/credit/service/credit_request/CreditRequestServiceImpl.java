@@ -1,4 +1,4 @@
-package com.sberbank.credit.service;
+package com.sberbank.credit.service.credit_request;
 
 import com.sberbank.credit.model.CreditInfo;
 import com.sberbank.credit.model.CreditRequestEntity;
@@ -9,9 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Calendar;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 @Service("creditRequest")
@@ -19,7 +18,7 @@ import java.util.List;
 public class CreditRequestServiceImpl implements CreditRequestService {
 
     @Autowired
-    CreditRequestRepository creditRequestRepository;
+    private CreditRequestRepository creditRequestRepository;
 
     @Override
     public List<CreditRequestEntity> findAll() {
@@ -32,23 +31,28 @@ public class CreditRequestServiceImpl implements CreditRequestService {
     }
 
     @Override
+    public CreditRequestEntity findById(Long id) {
+//        return new CreditRequestEntity(new Date(), 10000.00, 5.0, 6, "bla");
+        return creditRequestRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public CreditRequestEntity createRequestByOrderAndProduct(OrderEntity order, ProductEntity product) {
         CreditRequestEntity creditRequest = new CreditRequestEntity();
         creditRequest.setOrder(order);
         creditRequest.setCreateDate(new Date());
         creditRequest.setRate(findRateByOrder(order, product));
-        //TODO:Count Sum properly
-        creditRequest.setSum((order.getSum() * (creditRequest.getRate() / 100)) + order.getSum());
+        creditRequest.setSum(getCurrentSum(order, product, creditRequest.getRate()));
+        creditRequest.setTerm(product.getTerm());
 
         return creditRequest;
     }
 
     private Double findRateByOrder(OrderEntity order, ProductEntity product) {
-        double discountSum = order.getSum() - (order.getSum() * order.getDiscount() / 100);
         double finalRate = 0;
 
         for (double currentRate = product.getMinRate(); currentRate <= product.getMaxRate(); currentRate += 0.1) {
-            double currentSum = (discountSum * (currentRate / 100) / 12 * product.getTerm()) + discountSum;
+            double currentSum = getCurrentSum(order, product, currentRate);
             double sumBetween = order.getSum() - currentSum;
             if (sumBetween < 0)
                 break;
@@ -57,16 +61,19 @@ public class CreditRequestServiceImpl implements CreditRequestService {
         return finalRate;
     }
 
+    private double getDiscountSum(OrderEntity order) {
+        return order.getSum() - (order.getSum() * order.getDiscount() / 100);
+    }
+
+    private double getCurrentSum(OrderEntity order, ProductEntity product, double rate) {
+        double discountSum = getDiscountSum(order);
+        return (discountSum * (rate / 100) / 12 * product.getTerm()) + discountSum;
+    }
+
     private double round(double number) {
         double val = number * 10;
         val = Math.round(val);
         return val / 10;
-    }
-
-    @Override
-    public CreditRequestEntity findById(Long id) {
-        return new CreditRequestEntity(new Date(), 10000.00, 5.0, "bla");
-//        return creditRequestRepository.findById(id).orElse(null);
     }
 
     public CreditInfo getCreditInfo(Long creditId) throws Exception {
@@ -78,40 +85,38 @@ public class CreditRequestServiceImpl implements CreditRequestService {
         CreditInfo creditInfo = new CreditInfo();
         creditInfo.setCreateDate(creditRequest.getCreateDate());
         creditInfo.setCurrentDate(new Date());
-        //TODO:
-//        creditInfo.setMonthPast(getMonthPast(creditInfo.getCreateDate(), creditInfo.getCurrentDate()));
-        creditInfo.setMonthPast(3);
-
+        creditInfo.setTerm(creditRequest.getTerm());
         creditInfo.setTotalSum(creditRequest.getSum());
         creditInfo.setRate(creditRequest.getRate());
+        creditInfo.setMonthPast(getMonthPast(creditInfo.getCreateDate(), creditInfo.getCurrentDate()));
         creditInfo.setCurrentRateSum(getCurrentRateSum(creditInfo));
-        //TODO:
-        creditInfo.setSumLeft(creditInfo.getTotalSum());
+        creditInfo.setSumLeft(getSumLeft(creditInfo));
 
         return creditInfo;
     }
 
     private double getSumLeft(CreditInfo creditInfo) {
-        return 0;
+        if (creditInfo.getMonthPast() == 0)
+            return creditInfo.getTotalSum();
+        else
+            return creditInfo.getTotalSum() - (creditInfo.getTotalSum() / creditInfo.getTerm()) * creditInfo.getMonthPast();
     }
 
     private double getCurrentRateSum(CreditInfo creditInfo) {
-        return creditInfo.getTotalSum() * (creditInfo.getRate() / 100) * creditInfo.getMonthPast();
+        return (creditInfo.getTotalSum() * (creditInfo.getRate() / 100) / creditInfo.getTerm()) * creditInfo.getMonthPast();
     }
-
 
     private int getMonthPast(Date createDate, Date currentDate) {
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(createDate);
-        int firstMonth = calendar.get(Calendar.MONTH);
-        calendar.setTime(currentDate);
-        return calendar.get(Calendar.MONTH) - firstMonth;
+        return (int) ChronoUnit.MONTHS.between(
+                new java.sql.Date(createDate.getTime()).toLocalDate(),
+                new java.sql.Date(new Date().getTime()).toLocalDate());
     }
 
-//    private Date getCurrentDate(Date createDate) {
-//        Calendar calendar = new GregorianCalendar();
-//        calendar.setTime(createDate);
-//
-//
-//    }
+    public CreditRequestRepository getCreditRequestRepository() {
+        return creditRequestRepository;
+    }
+
+    public void setCreditRequestRepository(CreditRequestRepository creditRequestRepository) {
+        this.creditRequestRepository = creditRequestRepository;
+    }
 }

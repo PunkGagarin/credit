@@ -1,10 +1,12 @@
 package com.sberbank.credit.config;
 
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import com.sberbank.credit.repository.CreditRequestRepository;
+import com.sberbank.credit.repository.OrderRepository;
+import com.sberbank.credit.repository.ProductRepository;
+import com.sberbank.credit.repository.UserRepository;
+import com.sberbank.credit.service.credit_request.CreditRequestServiceImpl;
+import org.mockito.Mockito;
+import org.springframework.context.annotation.*;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -25,10 +27,10 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("com.sberbank.credit.service")
-@EnableJpaRepositories(basePackages = "com.sberbank.credit.repository")
-@PropertySource("classpath:persistence.properties")
-public class AppConfig {
+@Import(CreditRequestServiceImpl.class)
+@EnableJpaRepositories
+public class TestConfig {
+
     private Properties prop = new Properties();
 
     {
@@ -96,4 +98,11 @@ public class AppConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    @Primary
+    CreditRequestRepository creditRequestRepository() {
+        return Mockito.mock(CreditRequestRepository.class);
+    }
+
 }

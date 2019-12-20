@@ -1,13 +1,14 @@
 package com.sberbank.credit.service;
 
-import com.sberbank.credit.config.AppConfig;
-import com.sberbank.credit.config.SecurityConfig;
+import com.sberbank.credit.config.TestConfig;
 import com.sberbank.credit.model.CreditInfo;
 import com.sberbank.credit.model.CreditRequestEntity;
 import com.sberbank.credit.model.OrderEntity;
 import com.sberbank.credit.model.ProductEntity;
 import com.sberbank.credit.repository.CreditRequestRepository;
+import com.sberbank.credit.service.credit_request.CreditRequestService;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -15,51 +16,54 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.Optional;
 
-//TODO: Import instead of Context, Mock or NGUnit
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {AppConfig.class, SecurityConfig.class})
+@ContextConfiguration(classes = {TestConfig.class})
 public class CreditRequestServiceImplTest {
 
     @Autowired
     private CreditRequestService creditRequestService;
 
-//    @Mock
-//    private CreditRequestRepository creditRequestRepository;
-
     @Autowired
     private CreditRequestRepository creditRequestRepository;
 
-//    @Bean
-//    @Primary
-//    public CreditRequestRepository creditRequestRepository(){
-//        return Mockito.mock(CreditRequestRepository.class);
-//    }
+    private Long creditId;
+    private CreditRequestEntity request;
+    private OrderEntity orderEntity;
+    private ProductEntity productEntity;
+
+    @Before
+    public void beforeClass() {
+        creditId = 1L;
+        request = new CreditRequestEntity(new Date(1571518348000L), 99975d,13.3 , 10, "tester");
+        orderEntity = new OrderEntity(100000.00, 10, "some goods");
+        productEntity = new ProductEntity(30000, 100000, 5, 24, 10);
+        Mockito.when(creditRequestRepository.findById(creditId)).thenReturn(Optional.of(request));
+    }
+
 
     @Test
-    @Transactional
-    public void testCreateRequestByOrderAndProduct(){
-        OrderEntity orderEntity = new OrderEntity(100000.00, 10,"some goods");
-        ProductEntity productEntity = new ProductEntity(30000, 100000, 5, 24, 10);
+    public void testCreateRequestByOrderAndProduct() {
+
         Double expectedRate = 13.3;
-
-        CreditRequestEntity request =  creditRequestService.createRequestByOrderAndProduct(orderEntity, productEntity);
-
+        CreditRequestEntity request = creditRequestService.createRequestByOrderAndProduct(orderEntity, productEntity);
         Assert.assertEquals("Should be 13.3", expectedRate, request.getRate());
-
-        creditRequestRepository.save(request);
     }
 
     @Test
     public void testCreateInfo() throws Exception {
-        Long creditId = 1L;
-        CreditRequestEntity request = new CreditRequestEntity(new Date(), 100000d, 13.3, "petrov");
-        Mockito.when(creditRequestRepository.findById(creditId)).thenReturn(Optional.of(request));
 
         CreditInfo info = creditRequestService.getCreditInfo(creditId);
-    }
 
+        Double expectedSumLeft = 79980d;
+        Double expectedCurrentRateSum = 2659.335d;
+
+        Assert.assertEquals("Must be " + request.getCreateDate(), request.getCreateDate(), info.getCreateDate());
+        Assert.assertEquals("Must be " + request.getRate(), request.getRate(), info.getRate());
+        Assert.assertEquals("Must be " + expectedSumLeft, expectedSumLeft, info.getSumLeft());
+        Assert.assertEquals("Must be " + expectedCurrentRateSum, expectedCurrentRateSum, info.getCurrentRateSum());
+
+    }
 }

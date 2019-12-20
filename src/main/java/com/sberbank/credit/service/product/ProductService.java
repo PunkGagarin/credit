@@ -1,4 +1,4 @@
-package com.sberbank.credit.service;
+package com.sberbank.credit.service.product;
 
 import com.sberbank.credit.model.ProductEntity;
 

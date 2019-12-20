@@ -1,4 +1,4 @@
-package com.sberbank.credit.service;
+package com.sberbank.credit.service.credit_request;
 
 import com.sberbank.credit.model.CreditInfo;
 import com.sberbank.credit.model.CreditRequestEntity;

@@ -1,7 +1,7 @@
 <#include "../main-template.ftl"/>
 
 <#macro content>
-    <form action="/login/process" method="post">
+    <form action="/login?orderId=#{orderId!1}" method="post">
         <div>
             Login: <input name="login" type="login">
         </div>
@@ -15,12 +15,11 @@
                     <input type="submit" value="Log In"/>
                 </td>
                 <td>
-                    <form action="/sign_up">
-                        <input type="button" value="Sign Up">
-                    </form>
+                    <a href="/sign_up">Sign Up</a>
                 </td>
             </tr>
         </table>
+
 
     </form>
     <#if error??>

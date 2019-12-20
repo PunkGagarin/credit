@@ -8,20 +8,22 @@ public class CreditInfo {
 
     private Date currentDate;
 
-    private int monthPast;
+    private Integer monthPast;
 
-    private double rate;
+    private Double rate;
 
-    private double currentRateSum;
+    private Double currentRateSum;
 
-    private double totalSum;
+    private Double totalSum;
 
-    private double sumLeft;
+    private Double sumLeft;
+
+    private Integer term;
 
     public CreditInfo() {
     }
 
-    public CreditInfo(Date createDate, Date currentDate, int monthPast, double rate, double currentRateSum, double totalSum, double sumLeft) {
+    public CreditInfo(Date createDate, Date currentDate, Integer monthPast, Double rate, Double currentRateSum, Double totalSum, Double sumLeft, Integer term) {
         this.createDate = createDate;
         this.currentDate = currentDate;
         this.monthPast = monthPast;
@@ -29,6 +31,7 @@ public class CreditInfo {
         this.currentRateSum = currentRateSum;
         this.totalSum = totalSum;
         this.sumLeft = sumLeft;
+        this.term = term;
     }
 
     public Date getCreateDate() {
@@ -47,43 +50,51 @@ public class CreditInfo {
         this.currentDate = currentDate;
     }
 
-    public double getCurrentRateSum() {
-        return currentRateSum;
-    }
-
-    public void setCurrentRateSum(double currentRateSum) {
-        this.currentRateSum = currentRateSum;
-    }
-
-    public double getTotalSum() {
-        return totalSum;
-    }
-
-    public void setTotalSum(double totalSum) {
-        this.totalSum = totalSum;
-    }
-
-    public double getSumLeft() {
-        return sumLeft;
-    }
-
-    public void setSumLeft(double sumLeft) {
-        this.sumLeft = sumLeft;
-    }
-
-    public int getMonthPast() {
+    public Integer getMonthPast() {
         return monthPast;
     }
 
-    public void setMonthPast(int monthPast) {
+    public void setMonthPast(Integer monthPast) {
         this.monthPast = monthPast;
     }
 
-    public double getRate() {
+    public Double getRate() {
         return rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(Double rate) {
         this.rate = rate;
+    }
+
+    public Double getCurrentRateSum() {
+        return currentRateSum;
+    }
+
+    public void setCurrentRateSum(Double currentRateSum) {
+        this.currentRateSum = currentRateSum;
+    }
+
+    public Double getTotalSum() {
+        return totalSum;
+    }
+
+    public void setTotalSum(Double totalSum) {
+        this.totalSum = totalSum;
+    }
+
+    public Double getSumLeft() {
+        return sumLeft;
+    }
+
+    public void setSumLeft(Double sumLeft) {
+        this.sumLeft = sumLeft;
+    }
+
+    public Integer getTerm() {
+        return term;
+    }
+
+    public void setTerm(Integer term) {
+        this.term = term;
     }
 }

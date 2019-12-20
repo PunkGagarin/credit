@@ -1,7 +1,7 @@
 package com.sberbank.credit.security;
 
 import com.sberbank.credit.model.UserEntity;
-import com.sberbank.credit.service.UserService;
+import com.sberbank.credit.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

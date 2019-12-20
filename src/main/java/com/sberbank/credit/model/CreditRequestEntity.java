@@ -23,6 +23,8 @@ public class CreditRequestEntity {
 
     private Double rate;
 
+    private Integer term;
+
     @Column(name = "userLogin")
     private String userLogin;
 
@@ -33,10 +35,11 @@ public class CreditRequestEntity {
     public CreditRequestEntity() {
     }
 
-    public CreditRequestEntity(Date createDate, Double sum, Double rate, String userLogin) {
+    public CreditRequestEntity(Date createDate, Double sum, Double rate, Integer term, String userLogin) {
         this.createDate = createDate;
         this.sum = sum;
         this.rate = rate;
+        this.term = term;
         this.userLogin = userLogin;
     }
 
@@ -78,6 +81,14 @@ public class CreditRequestEntity {
 
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
+    }
+
+    public Integer getTerm() {
+        return term;
+    }
+
+    public void setTerm(Integer term) {
+        this.term = term;
     }
 
     public OrderEntity getOrder() {
