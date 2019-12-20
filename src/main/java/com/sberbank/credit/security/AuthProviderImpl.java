@@ -1,6 +1,6 @@
 package com.sberbank.credit.security;
 
-import com.sberbank.credit.model.entities.UserEntity;
+import com.sberbank.credit.model.entity.UserEntity;
 import com.sberbank.credit.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -29,14 +29,14 @@ public class AuthProviderImpl implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String login = authentication.getName();
         UserEntity user = userService.findByLogin(login);
-        if (user == null)
+        if (user == null) {
             throw new UsernameNotFoundException("User not found");
-
+        }
         String password = authentication.getCredentials().toString();
 
-        if (!passwordEncoder.matches(password, user.getPassword()))
+        if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("Wrong password");
-
+        }
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         return new UsernamePasswordAuthenticationToken(user, null, authorities);

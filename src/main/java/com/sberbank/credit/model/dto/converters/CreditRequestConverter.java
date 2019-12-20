@@ -1,7 +1,7 @@
-package com.sberbank.credit.model.dtos.converters;
+package com.sberbank.credit.model.dto.converters;
 
-import com.sberbank.credit.model.dtos.CreditRequest;
-import com.sberbank.credit.model.entities.CreditRequestEntity;
+import com.sberbank.credit.model.dto.CreditRequest;
+import com.sberbank.credit.model.entity.CreditRequestEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 

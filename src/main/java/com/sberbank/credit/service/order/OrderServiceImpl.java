@@ -1,6 +1,6 @@
 package com.sberbank.credit.service.order;
 
-import com.sberbank.credit.model.entities.OrderEntity;
+import com.sberbank.credit.model.entity.OrderEntity;
 import com.sberbank.credit.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,9 +19,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderEntity getOrder(Long id) {
-        if (!orderRepository.existsById(id))
+        if (!orderRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-
+        }
         return orderRepository.findById(id).orElse(null);
     }
 

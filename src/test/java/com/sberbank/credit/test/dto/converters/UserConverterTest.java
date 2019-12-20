@@ -1,10 +1,10 @@
-package com.sberbank.credit.test.dtos.converters;
+package com.sberbank.credit.test.dto.converters;
 
 
-import com.sberbank.credit.model.dtos.User;
-import com.sberbank.credit.model.dtos.converters.Converter;
-import com.sberbank.credit.model.dtos.converters.UserConverter;
-import com.sberbank.credit.model.entities.UserEntity;
+import com.sberbank.credit.model.dto.User;
+import com.sberbank.credit.model.dto.converters.Converter;
+import com.sberbank.credit.model.dto.converters.UserConverter;
+import com.sberbank.credit.model.entity.UserEntity;
 import org.junit.Assert;
 import org.junit.Test;
 

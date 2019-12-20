@@ -1,6 +1,6 @@
 package com.sberbank.credit.test.service;
 
-import com.sberbank.credit.model.entities.UserEntity;
+import com.sberbank.credit.model.entity.UserEntity;
 import com.sberbank.credit.repository.UserRepository;
 import com.sberbank.credit.service.user.UserService;
 import com.sberbank.credit.test.config.TestConfig;

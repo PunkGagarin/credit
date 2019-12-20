@@ -1,26 +1,39 @@
-package com.sberbank.credit.model.dtos;
+package com.sberbank.credit.model.entity;
 
-import java.io.Serializable;
+import com.sberbank.credit.constants.CreditConstants;
 
-public class Product implements Serializable {
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
 
+@Entity
+@Table(schema = CreditConstants.CREDIT, name = "product")
+public class ProductEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "code")
+    @Positive
+    @Min(1L)
     private Long code;
 
+    @Column(name = "minSum")
     private int minSum;
-
+    @Column(name = "maxSum")
     private int maxSum;
 
+    @Column(name = "minRate")
     private int minRate;
-
+    @Column(name = "maxRate")
     private int maxRate;
 
+    @Column(name = "term")
     private int term;
 
-    public Product() {
+    public ProductEntity() {
     }
 
-    public Product(Long code, int minSum, int maxSum, int minRate, int maxRate, int term) {
-        this.code = code;
+    public ProductEntity(int minSum, int maxSum, int minRate, int maxRate, int term) {
         this.minSum = minSum;
         this.maxSum = maxSum;
         this.minRate = minRate;

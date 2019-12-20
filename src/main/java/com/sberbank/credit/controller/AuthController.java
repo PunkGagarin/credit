@@ -1,8 +1,8 @@
 package com.sberbank.credit.controller;
 
-import com.sberbank.credit.model.dtos.User;
-import com.sberbank.credit.model.dtos.converters.Converter;
-import com.sberbank.credit.model.entities.UserEntity;
+import com.sberbank.credit.model.dto.User;
+import com.sberbank.credit.model.dto.converters.Converter;
+import com.sberbank.credit.model.entity.UserEntity;
 import com.sberbank.credit.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,13 +18,13 @@ import javax.validation.Valid;
 @Controller
 public class AuthController {
 
-    public static final String SIGN_UP_ENDPOINT = "/sign_up";
+    private static final String SIGN_UP_ENDPOINT = "/sign_up";
 
-    public static final String SIGN_UP_VIEW = "/auth/sign_up";
+    private static final String SIGN_UP_VIEW = "/auth/sign_up";
 
-    public static final String LOGIN_ENDPOINT = "/login";
+    private static final String LOGIN_ENDPOINT = "/login";
 
-    public static final String LOGIN_VIEW = "/auth/sign_in";
+    private static final String LOGIN_VIEW = "/auth/sign_in";
 
 
     @Autowired
@@ -44,8 +44,9 @@ public class AuthController {
 
     @PostMapping(SIGN_UP_ENDPOINT)
     public String signUp(@ModelAttribute @Valid User user, BindingResult result) {
-        if (result.hasErrors())
+        if (result.hasErrors()) {
             return SIGN_UP_VIEW;
+        }
         userService.addUser(userConverter.convertToEntity(user));
         return "redirect:" + LOGIN_ENDPOINT;
     }
@@ -53,15 +54,15 @@ public class AuthController {
     @GetMapping(LOGIN_ENDPOINT)
     public String login(@RequestParam(name = "error", required = false) Boolean error,
                         @RequestParam(name = "orderId", required = false) Long orderId, Model model) {
-        if (Boolean.TRUE.equals(error))
+        if (Boolean.TRUE.equals(error)) {
             model.addAttribute("error", error);
-
-        if (orderId != null)
+        }
+        if (orderId != null) {
             model.addAttribute("orderId", orderId);
-
-        if(currentOrderId != null)
-            model.addAttribute("currentOrderId",currentOrderId);
-
+        }
+        if (currentOrderId != null) {
+            model.addAttribute("currentOrderId", currentOrderId);
+        }
         return LOGIN_VIEW;
     }
 

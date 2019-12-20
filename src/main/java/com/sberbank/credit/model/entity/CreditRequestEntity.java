@@ -1,4 +1,4 @@
-package com.sberbank.credit.model.entities;
+package com.sberbank.credit.model.entity;
 
 import com.sberbank.credit.constants.CreditConstants;
 

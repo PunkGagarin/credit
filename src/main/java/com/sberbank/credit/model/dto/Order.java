@@ -1,4 +1,4 @@
-package com.sberbank.credit.model.dtos;
+package com.sberbank.credit.model.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;

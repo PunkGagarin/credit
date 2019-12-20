@@ -1,4 +1,4 @@
-package com.sberbank.credit.model.dtos;
+package com.sberbank.credit.model.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;

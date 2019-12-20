@@ -1,9 +1,9 @@
 package com.sberbank.credit.service.credit_request;
 
-import com.sberbank.credit.model.dtos.CreditInfo;
-import com.sberbank.credit.model.entities.CreditRequestEntity;
-import com.sberbank.credit.model.entities.OrderEntity;
-import com.sberbank.credit.model.entities.ProductEntity;
+import com.sberbank.credit.model.dto.CreditInfo;
+import com.sberbank.credit.model.entity.CreditRequestEntity;
+import com.sberbank.credit.model.entity.OrderEntity;
+import com.sberbank.credit.model.entity.ProductEntity;
 import com.sberbank.credit.repository.CreditRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,8 +53,9 @@ public class CreditRequestServiceImpl implements CreditRequestService {
         for (double currentRate = product.getMinRate(); currentRate <= product.getMaxRate(); currentRate += 0.1) {
             double currentSum = getCurrentSum(order, product, currentRate);
             double sumBetween = order.getSum() - currentSum;
-            if (sumBetween < 0)
+            if (sumBetween < 0) {
                 break;
+            }
             finalRate = round(currentRate);
         }
         return finalRate;

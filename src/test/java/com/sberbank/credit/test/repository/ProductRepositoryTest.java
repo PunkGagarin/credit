@@ -1,7 +1,7 @@
 package com.sberbank.credit.test.repository;
 
 import com.sberbank.credit.config.AppConfig;
-import com.sberbank.credit.model.entities.ProductEntity;
+import com.sberbank.credit.model.entity.ProductEntity;
 import com.sberbank.credit.repository.ProductRepository;
 import com.sberbank.credit.service.product.ProductServiceImpl;
 import org.junit.Assert;

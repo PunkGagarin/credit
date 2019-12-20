@@ -1,11 +1,9 @@
 package com.sberbank.credit.test.service;
 
-import com.sberbank.credit.model.dtos.CreditInfo;
-import com.sberbank.credit.model.dtos.converters.Converter;
-import com.sberbank.credit.model.dtos.converters.OrderConverter;
-import com.sberbank.credit.model.entities.CreditRequestEntity;
-import com.sberbank.credit.model.entities.OrderEntity;
-import com.sberbank.credit.model.entities.ProductEntity;
+import com.sberbank.credit.model.dto.CreditInfo;
+import com.sberbank.credit.model.entity.CreditRequestEntity;
+import com.sberbank.credit.model.entity.OrderEntity;
+import com.sberbank.credit.model.entity.ProductEntity;
 import com.sberbank.credit.repository.CreditRequestRepository;
 import com.sberbank.credit.service.credit_request.CreditRequestService;
 import com.sberbank.credit.test.config.TestConfig;

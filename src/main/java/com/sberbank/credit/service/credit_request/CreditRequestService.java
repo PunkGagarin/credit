@@ -1,9 +1,9 @@
 package com.sberbank.credit.service.credit_request;
 
-import com.sberbank.credit.model.dtos.CreditInfo;
-import com.sberbank.credit.model.entities.CreditRequestEntity;
-import com.sberbank.credit.model.entities.OrderEntity;
-import com.sberbank.credit.model.entities.ProductEntity;
+import com.sberbank.credit.model.dto.CreditInfo;
+import com.sberbank.credit.model.entity.CreditRequestEntity;
+import com.sberbank.credit.model.entity.OrderEntity;
+import com.sberbank.credit.model.entity.ProductEntity;
 
 import java.util.List;
 

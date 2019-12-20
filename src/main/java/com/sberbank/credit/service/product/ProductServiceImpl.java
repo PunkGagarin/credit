@@ -1,6 +1,6 @@
 package com.sberbank.credit.service.product;
 
-import com.sberbank.credit.model.entities.ProductEntity;
+import com.sberbank.credit.model.entity.ProductEntity;
 import com.sberbank.credit.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -21,9 +21,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductEntity findBySum(Double sum) {
-        if (sum == null)
+        if (sum == null) {
             return null;
-
+        }
         return productRepository.findOne(Specification.where(
                 sumBetweenSpec((int) Math.round(sum))
         )).orElse(null);

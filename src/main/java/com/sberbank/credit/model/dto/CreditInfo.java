@@ -1,4 +1,4 @@
-package com.sberbank.credit.model.dtos;
+package com.sberbank.credit.model.dto;
 
 import java.io.Serializable;
 import java.util.Date;

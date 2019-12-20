@@ -1,6 +1,6 @@
 package com.sberbank.credit.service.product;
 
-import com.sberbank.credit.model.entities.ProductEntity;
+import com.sberbank.credit.model.entity.ProductEntity;
 
 public interface ProductService {
 

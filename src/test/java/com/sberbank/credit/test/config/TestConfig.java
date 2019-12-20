@@ -28,7 +28,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @Import({CreditRequestServiceImpl.class, UserServiceImpl.class})
-@ComponentScan(basePackages = {"com.sberbank.credit.model.dtos"})
+@ComponentScan(basePackages = {"com.sberbank.credit.model.dto"})
 @EnableJpaRepositories
 public class TestConfig {
 

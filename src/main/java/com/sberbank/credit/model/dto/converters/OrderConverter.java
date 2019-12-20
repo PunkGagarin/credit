@@ -1,7 +1,7 @@
-package com.sberbank.credit.model.dtos.converters;
+package com.sberbank.credit.model.dto.converters;
 
-import com.sberbank.credit.model.dtos.Order;
-import com.sberbank.credit.model.entities.OrderEntity;
+import com.sberbank.credit.model.dto.Order;
+import com.sberbank.credit.model.entity.OrderEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 

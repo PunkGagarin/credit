@@ -1,10 +1,10 @@
 package com.sberbank.credit.controller;
 
-import com.sberbank.credit.model.dtos.Order;
-import com.sberbank.credit.model.dtos.converters.Converter;
-import com.sberbank.credit.model.entities.CreditRequestEntity;
-import com.sberbank.credit.model.entities.OrderEntity;
-import com.sberbank.credit.model.entities.ProductEntity;
+import com.sberbank.credit.model.dto.Order;
+import com.sberbank.credit.model.dto.converters.Converter;
+import com.sberbank.credit.model.entity.CreditRequestEntity;
+import com.sberbank.credit.model.entity.OrderEntity;
+import com.sberbank.credit.model.entity.ProductEntity;
 import com.sberbank.credit.service.credit_request.CreditRequestService;
 import com.sberbank.credit.service.order.OrderService;
 import com.sberbank.credit.service.product.ProductService;
@@ -22,23 +22,23 @@ import javax.validation.Valid;
 @Controller
 public class CreditController {
 
-    public static final String MAKE_ORDER_ENDPOINT = "/make_order";
+    private static final String MAKE_ORDER_ENDPOINT = "/make_order";
 
-    public static final String ORDERS_ENDPOINT = "/orders";
+    private static final String ORDERS_ENDPOINT = "/orders";
 
-    public static final String REQUEST_NEW_ENDPOINT = "/request/new";
+    private static final String REQUEST_NEW_ENDPOINT = "/request/new";
 
-    public static final String REQUEST_ENDPOINT = "/request";
+    private static final String REQUEST_ENDPOINT = "/request";
 
-    public static final String MAKE_ORDER_VIEW = "make_order";
+    private static final String MAKE_ORDER_VIEW = "make_order";
 
-    public static final String SHOW_ORDER_VIEW = "show_order";
+    private static final String SHOW_ORDER_VIEW = "show_order";
 
-    public static final String REQUEST_VIEW = "request";
+    private static final String REQUEST_VIEW = "request";
 
-    public static final String ORDER_ID = "orderId";
+    private static final String ORDER_ID = "orderId";
 
-    public static final String ORDER = "order";
+    private static final String ORDER = "order";
 
 
     @Autowired
@@ -51,10 +51,7 @@ public class CreditController {
     private ProductService productService;
 
     @Autowired
-    private Converter<OrderEntity,Order> orderConverter;
-
-
-
+    private Converter<OrderEntity, Order> orderConverter;
 
 
     @GetMapping("/")
@@ -70,8 +67,9 @@ public class CreditController {
 
     @PostMapping(MAKE_ORDER_ENDPOINT)
     public String makeOrder(@ModelAttribute @Valid Order order, BindingResult result) {
-        if(result.hasErrors())
+        if (result.hasErrors()) {
             return MAKE_ORDER_ENDPOINT;
+        }
         AuthController.setCurrentOrderId(order.getId());
         orderService.createOrder(orderConverter.convertToEntity(order));
         return String.format("redirect:/login?%s=%d", ORDER_ID, order.getId());
@@ -90,9 +88,9 @@ public class CreditController {
     public String createRequest(@RequestParam(ORDER_ID) Long orderId, Model model) {
         CreditRequestEntity request = createRequestByOrderId(orderId);
 
-        if (AuthController.getCurrentUser().getLogin() != null)
+        if (AuthController.getCurrentUser().getLogin() != null) {
             request.setUserLogin(AuthController.getCurrentUser().getLogin());
-
+        }
         creditRequestService.saveRequest(request);
         return String.format("redirect:%s?reqId=%d", REQUEST_ENDPOINT, request.getId());
     }

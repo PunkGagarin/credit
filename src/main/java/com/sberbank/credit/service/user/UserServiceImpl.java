@@ -1,6 +1,6 @@
 package com.sberbank.credit.service.user;
 
-import com.sberbank.credit.model.entities.UserEntity;
+import com.sberbank.credit.model.entity.UserEntity;
 import com.sberbank.credit.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -36,12 +36,12 @@ public class UserServiceImpl implements UserService {
     public UserEntity authenticate(String login, String password) throws Exception {
         UserEntity user = userRepository.findByLogin(login);
 
-        if (user == null)
+        if (user == null) {
             throw new UsernameNotFoundException("User not found");
-
-        if (!passwordEncoder.matches(password, user.getPassword()))
+        }
+        if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("Wrong password");
-
+        }
         return user;
     }
 
