@@ -1,7 +1,8 @@
-package com.sberbank.credit.repository;
+package com.sberbank.credit.test.repository;
 
 import com.sberbank.credit.config.AppConfig;
-import com.sberbank.credit.model.OrderEntity;
+import com.sberbank.credit.model.entities.OrderEntity;
+import com.sberbank.credit.repository.OrderRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

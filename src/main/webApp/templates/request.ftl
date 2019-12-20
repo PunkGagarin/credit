@@ -17,7 +17,7 @@
             Current Rate Sum
         </th>
         <th>
-            Current Sum
+            Total Sum
         </th>
         <th>
             Sum Left

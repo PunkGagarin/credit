@@ -1,15 +1,20 @@
 package com.sberbank.credit.controller;
 
-import com.sberbank.credit.model.CreditRequestEntity;
-import com.sberbank.credit.model.OrderEntity;
-import com.sberbank.credit.model.ProductEntity;
+import com.sberbank.credit.model.dtos.Order;
+import com.sberbank.credit.model.dtos.converters.Converter;
+import com.sberbank.credit.model.entities.CreditRequestEntity;
+import com.sberbank.credit.model.entities.OrderEntity;
+import com.sberbank.credit.model.entities.ProductEntity;
 import com.sberbank.credit.service.credit_request.CreditRequestService;
 import com.sberbank.credit.service.order.OrderService;
 import com.sberbank.credit.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -44,6 +49,11 @@ public class CreditController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private Converter<OrderEntity,Order> orderConverter;
+
+
+
 
     @GetMapping("/")
     public String homePage() {
@@ -52,15 +62,15 @@ public class CreditController {
 
     @GetMapping(MAKE_ORDER_ENDPOINT)
     public String getNewOrder(Model model) {
-        model.addAttribute(ORDER, new OrderEntity());
+        model.addAttribute(ORDER, new Order());
         return MAKE_ORDER_VIEW;
     }
 
     @PostMapping(MAKE_ORDER_ENDPOINT)
-    public String makeOrder(@ModelAttribute @Valid OrderEntity order) {
+    public String makeOrder(@ModelAttribute @Valid Order order) {
         //TODO: валидация
-        OrderEntity orderEntity = orderService.createOrder(order);
-        return String.format("redirect:/login?%s=%d", ORDER_ID, orderEntity.getId());
+        orderService.createOrder(orderConverter.convertToEntity(order));
+        return String.format("redirect:/login?%s=%d", ORDER_ID, order.getId());
     }
 
     @GetMapping(ORDERS_ENDPOINT)

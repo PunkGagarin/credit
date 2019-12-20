@@ -1,6 +1,6 @@
 package com.sberbank.credit.repository;
 
-import com.sberbank.credit.model.ProductEntity;
+import com.sberbank.credit.model.entities.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

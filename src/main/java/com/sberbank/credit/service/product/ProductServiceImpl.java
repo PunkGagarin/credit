@@ -1,6 +1,6 @@
 package com.sberbank.credit.service.product;
 
-import com.sberbank.credit.model.ProductEntity;
+import com.sberbank.credit.model.entities.ProductEntity;
 import com.sberbank.credit.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;

@@ -1,6 +1,7 @@
 package com.sberbank.credit.service.order;
 
-import com.sberbank.credit.model.OrderEntity;
+
+import com.sberbank.credit.model.entities.OrderEntity;
 
 import java.util.List;
 

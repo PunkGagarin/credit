@@ -1,7 +1,8 @@
-package com.sberbank.credit.repository;
+package com.sberbank.credit.test.repository;
 
 import com.sberbank.credit.config.AppConfig;
-import com.sberbank.credit.model.ProductEntity;
+import com.sberbank.credit.model.entities.ProductEntity;
+import com.sberbank.credit.repository.ProductRepository;
 import com.sberbank.credit.service.product.ProductServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,9 +21,9 @@ public class ProductRepositoryTest {
 
     @Test
     public void testFindBySum(){
-        double sum = 5000.00;
+        double sum = 300005.00;
 
-        ProductEntity preparedEntity = new ProductEntity(3000, 30000, 5,24,6);
+        ProductEntity preparedEntity = new ProductEntity(300000, 300010, 5,24,6);
         preparedEntity.setCode(1006L);
 
         productRepository.save(preparedEntity);
@@ -32,6 +33,7 @@ public class ProductRepositoryTest {
         )).orElse(null);
 
         Assert.assertNotNull("can not be null", entity);
+
         productRepository.delete(preparedEntity);
     }
 }

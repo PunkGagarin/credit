@@ -1,10 +1,13 @@
-package com.sberbank.credit.service;
+package com.sberbank.credit.test.service;
 
-import com.sberbank.credit.config.TestConfig;
-import com.sberbank.credit.model.CreditInfo;
-import com.sberbank.credit.model.CreditRequestEntity;
-import com.sberbank.credit.model.OrderEntity;
-import com.sberbank.credit.model.ProductEntity;
+import com.sberbank.credit.model.dtos.converters.Converter;
+import com.sberbank.credit.model.dtos.converters.OrderConverter;
+import com.sberbank.credit.test.config.TestConfig;
+import com.sberbank.credit.model.dtos.CreditInfo;
+import com.sberbank.credit.model.dtos.CreditRequest;
+import com.sberbank.credit.model.entities.CreditRequestEntity;
+import com.sberbank.credit.model.entities.OrderEntity;
+import com.sberbank.credit.model.entities.ProductEntity;
 import com.sberbank.credit.repository.CreditRequestRepository;
 import com.sberbank.credit.service.credit_request.CreditRequestService;
 import org.junit.Assert;
@@ -29,6 +32,8 @@ public class CreditRequestServiceImplTest {
     @Autowired
     private CreditRequestRepository creditRequestRepository;
 
+    Converter orderConverter = new OrderConverter();
+
     private Long creditId;
     private CreditRequestEntity request;
     private OrderEntity orderEntity;
@@ -37,7 +42,7 @@ public class CreditRequestServiceImplTest {
     @Before
     public void beforeClass() {
         creditId = 1L;
-        request = new CreditRequestEntity(new Date(1571518348000L), 99975d,13.3 , 10, "tester");
+        request = new CreditRequestEntity(new Date(1571518348000L), 99975d, 13.3, 10, "tester");
         orderEntity = new OrderEntity(100000.00, 10, "some goods");
         productEntity = new ProductEntity(30000, 100000, 5, 24, 10);
         Mockito.when(creditRequestRepository.findById(creditId)).thenReturn(Optional.of(request));
@@ -48,8 +53,11 @@ public class CreditRequestServiceImplTest {
     public void testCreateRequestByOrderAndProduct() {
 
         Double expectedRate = 13.3;
+        Integer expectedTerm = 10;
         CreditRequestEntity request = creditRequestService.createRequestByOrderAndProduct(orderEntity, productEntity);
-        Assert.assertEquals("Should be 13.3", expectedRate, request.getRate());
+        Assert.assertEquals("Must be " + expectedRate, expectedRate, request.getRate());
+        Assert.assertEquals("Must be " + expectedTerm, expectedTerm, request.getTerm());
+
     }
 
     @Test

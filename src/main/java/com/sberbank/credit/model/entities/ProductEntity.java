@@ -1,4 +1,4 @@
-package com.sberbank.credit.model;
+package com.sberbank.credit.model.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;

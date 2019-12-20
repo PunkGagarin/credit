@@ -1,22 +1,12 @@
-package com.sberbank.credit.model;
+package com.sberbank.credit.model.dtos;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Positive;
+import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@Table(schema = "credit2", name = "credit_request")
-public class CreditRequestEntity {
+public class CreditRequest implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @Positive
-    @Min(1L)
     private Long id;
 
-    @Column(name = "create_date")
     private Date createDate;
 
     private Double sum;
@@ -25,17 +15,13 @@ public class CreditRequestEntity {
 
     private Integer term;
 
-    @Column(name = "userLogin")
     private String userLogin;
 
-    @OneToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
-    private OrderEntity order;
-
-    public CreditRequestEntity() {
+    public CreditRequest() {
     }
 
-    public CreditRequestEntity(Date createDate, Double sum, Double rate, Integer term, String userLogin) {
+    public CreditRequest(Long id, Date createDate, Double sum, Double rate, Integer term, String userLogin) {
+        this.id = id;
         this.createDate = createDate;
         this.sum = sum;
         this.rate = rate;
@@ -75,14 +61,6 @@ public class CreditRequestEntity {
         this.rate = rate;
     }
 
-    public String getUserLogin() {
-        return userLogin;
-    }
-
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
-    }
-
     public Integer getTerm() {
         return term;
     }
@@ -91,11 +69,11 @@ public class CreditRequestEntity {
         this.term = term;
     }
 
-    public OrderEntity getOrder() {
-        return order;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setOrder(OrderEntity order) {
-        this.order = order;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 }

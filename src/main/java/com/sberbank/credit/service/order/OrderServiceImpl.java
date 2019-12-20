@@ -1,6 +1,6 @@
 package com.sberbank.credit.service.order;
 
-import com.sberbank.credit.model.OrderEntity;
+import com.sberbank.credit.model.entities.OrderEntity;
 import com.sberbank.credit.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

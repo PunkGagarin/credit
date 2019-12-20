@@ -1,6 +1,6 @@
 package com.sberbank.credit.service.user;
 
-import com.sberbank.credit.model.UserEntity;
+import com.sberbank.credit.model.entities.UserEntity;
 
 public interface UserService {
 

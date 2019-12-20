@@ -1,9 +1,7 @@
-package com.sberbank.credit.config;
+package com.sberbank.credit.test.config;
 
+import com.sberbank.credit.config.AppConfig;
 import com.sberbank.credit.repository.CreditRequestRepository;
-import com.sberbank.credit.repository.OrderRepository;
-import com.sberbank.credit.repository.ProductRepository;
-import com.sberbank.credit.repository.UserRepository;
 import com.sberbank.credit.service.credit_request.CreditRequestServiceImpl;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.*;
@@ -28,6 +26,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @Import(CreditRequestServiceImpl.class)
+@ComponentScan(basePackages = {"com.sberbank.credit.model.dtos"})
 @EnableJpaRepositories
 public class TestConfig {
 
@@ -87,7 +86,7 @@ public class TestConfig {
 
     private Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         properties.setProperty("hibernate.hbm2ddl.auto", "create");
         properties.setProperty("show_sq", "true");
 

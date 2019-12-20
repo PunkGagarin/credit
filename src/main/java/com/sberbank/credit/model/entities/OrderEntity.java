@@ -1,4 +1,4 @@
-package com.sberbank.credit.model;
+package com.sberbank.credit.model.entities;
 
 
 import javax.persistence.*;
@@ -22,7 +22,7 @@ public class OrderEntity {
 
 
     @Column(name = "discount")
-    private int discount;
+    private Integer discount;
 
     @Column(name = "goods")
     private String goods;
@@ -33,7 +33,7 @@ public class OrderEntity {
     public OrderEntity() {
     }
 
-    public OrderEntity(@Positive @NotNull Double sum, int discount, String goods) {
+    public OrderEntity(@Positive @NotNull Double sum, Integer discount, String goods) {
         this.sum = sum;
         this.discount = discount;
         this.goods = goods;
@@ -55,11 +55,11 @@ public class OrderEntity {
         this.sum = sum;
     }
 
-    public int getDiscount() {
+    public Integer getDiscount() {
         return discount;
     }
 
-    public void setDiscount(int discount) {
+    public void setDiscount(Integer discount) {
         this.discount = discount;
     }
 

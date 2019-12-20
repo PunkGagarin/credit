@@ -1,6 +1,8 @@
 package com.sberbank.credit.controller;
 
-import com.sberbank.credit.model.UserEntity;
+import com.sberbank.credit.model.dtos.User;
+import com.sberbank.credit.model.dtos.converters.Converter;
+import com.sberbank.credit.model.entities.UserEntity;
 import com.sberbank.credit.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,19 +27,22 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    private static UserEntity currentUser;
+    @Autowired
+    private Converter<UserEntity, User> userConverter;
+
+    private static User currentUser;
 
     @GetMapping(SIGN_UP_ENDPOINT)
     public String getSignUp(Model model) {
-        model.addAttribute("user", new UserEntity());
+        model.addAttribute("user", new User());
         return SIGN_UP_VIEW;
     }
 
     @PostMapping(SIGN_UP_ENDPOINT)
-    public String signUp(@ModelAttribute @Valid UserEntity user, BindingResult result) {
+    public String signUp(@ModelAttribute @Valid User user, BindingResult result) {
         //TODO: Валидация
-        userService.addUser(user);
-        return "redirect:"+LOGIN_ENDPOINT;
+        userService.addUser(userConverter.convertToEntity(user));
+        return "redirect:" + LOGIN_ENDPOINT;
     }
 
     @GetMapping(LOGIN_ENDPOINT)
@@ -60,7 +65,7 @@ public class AuthController {
         UserEntity user = null;
         try {
             user = userService.authenticate(login, password);
-            currentUser = user;
+            currentUser = userConverter.convertToDto(user);
             return "redirect:/orders?orderId=" + orderId;
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,7 +73,7 @@ public class AuthController {
         return "redirect:/login?error=true&orderId=" + orderId;
     }
 
-    public static UserEntity getCurrentUser() {
+    public static User getCurrentUser() {
         return currentUser;
     }
 }

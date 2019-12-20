@@ -1,8 +1,9 @@
-package com.sberbank.credit.model;
+package com.sberbank.credit.model.dtos;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CreditInfo {
+public class CreditInfo implements Serializable {
 
     private Date createDate;
 
