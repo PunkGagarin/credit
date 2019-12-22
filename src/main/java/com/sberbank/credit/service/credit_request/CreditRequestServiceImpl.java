@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service("creditRequest")
 @Transactional
@@ -96,7 +94,6 @@ public class CreditRequestServiceImpl implements CreditRequestService {
         creditInfo.setSumLeft(getSumLeft(creditInfo, creditInfo.getMonthPast()));
         creditInfo.setNextMonths(countNextMonths(creditInfo));
 
-
         return creditInfo;
     }
 
@@ -108,9 +105,18 @@ public class CreditRequestServiceImpl implements CreditRequestService {
                     new PayPlan(currentMonthPast,
                             round(getCurrentRateSum(creditInfo, currentMonthPast)),
                             getCurrentPayedSum(creditInfo, currentMonthPast),
-                            getSumLeft(creditInfo, currentMonthPast)));
+                            getSumLeft(creditInfo, currentMonthPast),
+                            getMonthName(creditInfo.getCreateDate(), currentMonthPast)
+                    ));
         }
         return nextMonths;
+    }
+
+    private String getMonthName(Date createDate, int currentMonthPast) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(createDate);
+        calendar.add(Calendar.MONTH, currentMonthPast);
+        return calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH);
     }
 
     private Double getCurrentPayedSum(CreditInfo creditInfo, int currentMonthPast) {

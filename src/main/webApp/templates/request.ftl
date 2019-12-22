@@ -47,6 +47,9 @@
                 Month Number
             </th>
             <th>
+                Month Name
+            </th>
+            <th>
                 Current Rate Sum
             </th>
             <th>
@@ -55,13 +58,15 @@
             <th>
                 Sum Left
             </th>
+
         </tr>
         <#list payPlan as plan>
             <tr>
                 <td>${plan.currentMonth}</td>
+                <td>${plan.currentMonthName}</td>
                 <td>${plan.currentRateSum}</td>
                 <td>${plan.currentSum}</td>
-                <td>#{plan.sumLeft}</td>
+                <td>${plan.sumLeft}</td>
             </tr>
         </#list>
     </table>

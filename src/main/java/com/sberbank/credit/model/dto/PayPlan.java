@@ -6,15 +6,17 @@ public class PayPlan {
     private Double currentRateSum;
     private Double currentSum;
     private Double sumLeft;
+    private String currentMonthName;
 
     public PayPlan() {
     }
 
-    public PayPlan(Integer currentMonth, Double currentRateSum, Double currentSum, Double sumLeft) {
+    public PayPlan(Integer currentMonth, Double currentRateSum, Double currentSum, Double sumLeft, String currentMonthName) {
         this.currentMonth = currentMonth;
         this.currentRateSum = currentRateSum;
         this.currentSum = currentSum;
         this.sumLeft = sumLeft;
+        this.currentMonthName = currentMonthName;
     }
 
     public Double getCurrentSum() {
@@ -47,5 +49,13 @@ public class PayPlan {
 
     public void setSumLeft(Double sumLeft) {
         this.sumLeft = sumLeft;
+    }
+
+    public String getCurrentMonthName() {
+        return currentMonthName;
+    }
+
+    public void setCurrentMonthName(String currentMonthName) {
+        this.currentMonthName = currentMonthName;
     }
 }
