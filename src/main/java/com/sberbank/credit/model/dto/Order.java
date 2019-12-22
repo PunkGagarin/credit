@@ -1,5 +1,6 @@
 package com.sberbank.credit.model.dto;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ public class Order implements Serializable {
     private Long id;
 
     @Positive
+    @Max(300000)
     private Double sum;
 
     private Integer discount;
