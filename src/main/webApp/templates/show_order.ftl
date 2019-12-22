@@ -23,7 +23,7 @@
         <td>${order.goods}</td>
     </tr>
 </table>
-<form action="/request/new?orderId=${order.id}" method="post">
+<form action="/request/new?orderId=${orderId!currentOrderId}" method="post">
     <input type="submit" value="Взять кредит"/>
 </form>
 </body>

@@ -1,6 +1,7 @@
 package com.sberbank.credit.test.service;
 
 import com.sberbank.credit.model.dto.CreditInfo;
+import com.sberbank.credit.model.dto.PayPlan;
 import com.sberbank.credit.model.entity.CreditRequestEntity;
 import com.sberbank.credit.model.entity.OrderEntity;
 import com.sberbank.credit.model.entity.ProductEntity;
@@ -37,9 +38,10 @@ public class CreditRequestServiceImplTest {
     @Before
     public void beforeClass() {
         creditId = 1L;
-        request = new CreditRequestEntity(new Date(1571518348000L), 99975d, 13.3, 10, "tester");
         orderEntity = new OrderEntity(100000.00, 10, "some goods");
         productEntity = new ProductEntity(30000, 100000, 5, 24, 10);
+        request = new CreditRequestEntity(new Date(1571518348000L), 99975d, 13.3, 10, "tester");
+        request.setOrder(orderEntity);
         Mockito.when(creditRequestRepository.findById(creditId)).thenReturn(Optional.of(request));
     }
 
@@ -61,12 +63,13 @@ public class CreditRequestServiceImplTest {
         CreditInfo info = creditRequestService.getCreditInfo(creditId);
 
         Double expectedSumLeft = 79980d;
-        Double expectedCurrentRateSum = 2659.335d;
+        Double expectedCurrentRateSum = 1995.0d;
 
         Assert.assertEquals("Must be " + request.getCreateDate(), request.getCreateDate(), info.getCreateDate());
         Assert.assertEquals("Must be " + request.getRate(), request.getRate(), info.getRate());
         Assert.assertEquals("Must be " + expectedSumLeft, expectedSumLeft, info.getSumLeft());
         Assert.assertEquals("Must be " + expectedCurrentRateSum, expectedCurrentRateSum, info.getCurrentRateSum());
+        Assert.assertEquals("Must be 8 months", 8, info.getNextMonths().size());
 
     }
 }

@@ -1,5 +1,6 @@
 package com.sberbank.credit.controller;
 
+import com.sberbank.credit.model.dto.CreditInfo;
 import com.sberbank.credit.model.dto.Order;
 import com.sberbank.credit.model.dto.converters.Converter;
 import com.sberbank.credit.model.entity.CreditRequestEntity;
@@ -78,8 +79,12 @@ public class CreditController {
     @GetMapping(ORDERS_ENDPOINT)
     public String getOrders(@RequestParam(value = ORDER_ID, required = false) Long orderId, Model model) {
         if (orderId != null) {
-            model.addAttribute(ORDER, orderService.getOrder(orderId));
-            model.addAttribute(ORDER_ID, orderId);
+            Order order = orderConverter.convertToDto(orderService.getOrder(orderId));
+            model.addAttribute(ORDER, order);
+            model.addAttribute("orderId", order.getId().toString());
+        }
+        if (AuthController.getCurrentOrderId() != null) {
+            model.addAttribute("currentOrderId", AuthController.getCurrentOrderId().toString());
         }
         return SHOW_ORDER_VIEW;
     }
@@ -88,8 +93,9 @@ public class CreditController {
     public String createRequest(@RequestParam(ORDER_ID) Long orderId, Model model) {
         CreditRequestEntity request = createRequestByOrderId(orderId);
 
-        if (AuthController.getCurrentUser().getLogin() != null) {
-            request.setUserLogin(AuthController.getCurrentUser().getLogin());
+        String login = AuthController.getCurrentUser().getLogin();
+        if (login != null) {
+            request.setUserLogin(login);
         }
         creditRequestService.saveRequest(request);
         return String.format("redirect:%s?reqId=%d", REQUEST_ENDPOINT, request.getId());
@@ -103,8 +109,11 @@ public class CreditController {
 
     @GetMapping(REQUEST_ENDPOINT)
     public String getRequest(@RequestParam("reqId") Long reqId, Model model) {
+        CreditInfo creditInfo = null;
         try {
-            model.addAttribute("creditInfo", creditRequestService.getCreditInfo(reqId));
+            creditInfo = creditRequestService.getCreditInfo(reqId);
+            model.addAttribute("creditInfo", creditInfo);
+            model.addAttribute("payPlan", creditInfo.getNextMonths());
         } catch (Exception e) {
             e.printStackTrace();
         }

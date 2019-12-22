@@ -89,4 +89,8 @@ public class AuthController {
     public static void setCurrentOrderId(Long currentOrderId) {
         AuthController.currentOrderId = currentOrderId;
     }
+
+    public static Long getCurrentOrderId() {
+        return currentOrderId;
+    }
 }

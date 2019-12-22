@@ -2,6 +2,7 @@ package com.sberbank.credit.model.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class CreditInfo implements Serializable {
 
@@ -19,12 +20,17 @@ public class CreditInfo implements Serializable {
 
     private Double sumLeft;
 
+    private Double baseSum;
+
     private Integer term;
+
+
+    private List<PayPlan> nextMonths;
 
     public CreditInfo() {
     }
 
-    public CreditInfo(Date createDate, Date currentDate, Integer monthPast, Double rate, Double currentRateSum, Double totalSum, Double sumLeft, Integer term) {
+    public CreditInfo(Date createDate, Date currentDate, Integer monthPast, Double rate, Double currentRateSum, Double totalSum, Double sumLeft, Integer term, List<PayPlan> nextMonths) {
         this.createDate = createDate;
         this.currentDate = currentDate;
         this.monthPast = monthPast;
@@ -33,6 +39,7 @@ public class CreditInfo implements Serializable {
         this.totalSum = totalSum;
         this.sumLeft = sumLeft;
         this.term = term;
+        this.nextMonths = nextMonths;
     }
 
     public Date getCreateDate() {
@@ -91,11 +98,27 @@ public class CreditInfo implements Serializable {
         this.sumLeft = sumLeft;
     }
 
+    public Double getBaseSum() {
+        return baseSum;
+    }
+
+    public void setBaseSum(Double baseSum) {
+        this.baseSum = baseSum;
+    }
+
     public Integer getTerm() {
         return term;
     }
 
     public void setTerm(Integer term) {
         this.term = term;
+    }
+
+    public List<PayPlan> getNextMonths() {
+        return nextMonths;
+    }
+
+    public void setNextMonths(List<PayPlan> nextMonths) {
+        this.nextMonths = nextMonths;
     }
 }
